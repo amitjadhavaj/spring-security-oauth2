@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Login Success</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+<script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
+<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+<script type="text/javascript"
+	src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<h3>
+		<div class="label label-info">
+			Welcome, <span th:text="${name}">user</span>!
+		</div>
+
+	</h3>
+
+	<div>
+		<button onClick="logout()" class="btn btn-primary">Logout</button>
+	</div>
+
+
+	<script type="text/javascript">
+		$.ajaxSetup({
+			beforeSend : function(xhr, settings) {
+				if (settings.type == 'POST' || settings.type == 'PUT'
+						|| settings.type == 'DELETE') {
+					if (!(/^http:.*/.test(settings.url) || /^https:.*/
+							.test(settings.url))) {
+						// Only send the token to relative URLs i.e. locally.
+						xhr.setRequestHeader("X-XSRF-TOKEN", Cookies
+								.get('XSRF-TOKEN'));
+					}
+				}
+			}
+		});
+
+
+		var logout = function() {
+			$.post("/logout", function() {
+				//$("#user").html('');
+				window.location = '/oauth_login';
+			})
+			return true;
+		}
+	</script>
+</body>
+</html>

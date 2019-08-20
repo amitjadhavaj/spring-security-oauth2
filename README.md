@@ -1,2 +1,1 @@
-# spring-security-oauth2
-3rd party authentication with Google and Facebook using spring boot  oauth2
+https://www.baeldung.com/spring-security-5-oauth2-login
